@@ -1,5 +1,5 @@
 # shopping-list
-This is a social responsibility project that is built by [devinim](devin.im) team.
+This is a social responsibility project that is built by [devinim](https://devin.im) team.
 
 ## About
 This project addresses the issue of shopping for a house with more than one residents. In order to purchase everything needed by the residents, we create an interactive shopping list which might be filled by residents of the house. We aim to achieve no second trips to supermarket in 10 minutes.
