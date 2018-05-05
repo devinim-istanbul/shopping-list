@@ -2,3 +2,5 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 .idea/
+.gitsecret/keys/random_seed
+config.json
