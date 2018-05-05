@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test": "node_modules/.bin/jest",
-    "pre-commit": "git secret hide"
+    "pre-commit": "git secret hide",
+    "appr": "appr"
   },
   "jest": {
     "preset": "jest-expo"
@@ -19,6 +20,8 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "appr": "^2.0.0",
+    "exp": "^53.1.0",
     "jest-expo": "^27.0.1"
   }
 }

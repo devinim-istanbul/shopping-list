@@ -1,0 +1,5 @@
+language: node_js
+node_js:
+  - "node"
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm run appr; fi'
