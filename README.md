@@ -22,3 +22,9 @@ then, simply use
 ```
 exp start
 ```
+
+## About config files
+In case you want to contribute this project, you will need to this section. If you want to extend the application, you may pursue your own ways to protect your config files.
+
+The project config files are encrypted with git secret. In order to access the config files, you need to install `git-secret` and `gpg`.
+After installing the dependencies, you will need to send your public key with your e-mail address (which is linked to your public key) to one of the [maintainers](Maintainers.md)
