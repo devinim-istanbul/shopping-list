@@ -1,8 +1,8 @@
 import BaseModel from '../base';
 
 class ShoppingList extends BaseModel {
-  constructor(id, name, items) {
-    super(id, name);
+  constructor(name, items) {
+    super(name);
 
     this.items = items;
   }

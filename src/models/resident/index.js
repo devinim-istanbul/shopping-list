@@ -1,8 +1,8 @@
 import BaseModel from '../base';
 
 class Resident extends BaseModel {
-  constructor(id, name, houseId) {
-    super(id, name);
+  constructor(name, houseId) {
+    super(name);
 
     this.houseId = houseId;
   }
