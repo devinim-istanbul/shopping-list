@@ -4,12 +4,15 @@
   "scripts": {
     "test": "node_modules/.bin/jest",
     "pre-commit": "git secret hide",
-    "appr": "appr"
+    "appr": "appr",
+    "encrypt": "encrypt config.json config.json.secret",
+    "decrypt": "decrypt config.json.secret config.json"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "config-leaf": "^0.3.0",
     "expo": "^27.0.1",
     "firebase": "^4.13.1",
     "react": "16.3.1",
