@@ -2,8 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
+    "pre-commit": "npm test",
     "test": "node_modules/.bin/jest",
-    "pre-commit": "git secret hide",
     "appr": "appr",
     "encrypt": "encrypt config.json config.json.secret",
     "decrypt": "decrypt config.json.secret config.json"
