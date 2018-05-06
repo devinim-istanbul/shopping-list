@@ -5,7 +5,7 @@ class House extends BaseModel {
     super(name);
 
     this.users = users;
-    this.shoppingList = this.shoppingList;
+    this.shoppingList = shoppingList;
   }
 }
 
