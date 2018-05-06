@@ -26,5 +26,4 @@ exp start
 ## About config files
 In case you want to contribute this project, you will need to this section. If you want to extend the application, you may pursue your own ways to protect your config files.
 
-The project config files are encrypted with git secret. In order to access the config files, you need to install `git-secret` and `gpg`.
-After installing the dependencies; firstly, you will need to [create a gpg key](https://help.github.com/articles/generating-a-new-gpg-key). Then, you will need to send your public key with your e-mail address (which is linked to your public key) to one of the [maintainers](MAINTAINERS.md)
+The project config files are encrypted with `config-leaf`. In order to access the config files, you need to contact one of the [maintainers](MAINTAINERS.md) to get the password.
