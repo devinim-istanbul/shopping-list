@@ -17,6 +17,13 @@ const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 export default class App extends React.Component {
 
+    constructor(){
+        super();
+        console.ignoredYellowBox = [
+            'Setting a timer'
+        ];
+    }
+
     componentWillMount(){
         firebase.initializeApp(config.firebase);
         this.setState({ appLoaded: true });

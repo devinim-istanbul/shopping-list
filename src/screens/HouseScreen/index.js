@@ -1,5 +1,10 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
+
+import {
+    navigateBySessionState
+} from '../../redux/actions';
 
 class HouseScreen extends React.Component {
 
@@ -12,9 +17,19 @@ class HouseScreen extends React.Component {
             <View>
                 <Text>HouseScreen</Text>
                 <Button title='Set House' onPress={this.navigate} />
+                <Button title='Test State' onPress={() => this.props.navigateBySessionState()} />
             </View>
         )
     }
 }
 
-export default HouseScreen;
+const mapStateToProps = () => {
+    return {
+        test : 1
+    }
+};
+
+export default connect(mapStateToProps,{
+    navigateBySessionState
+})(HouseScreen);
+
