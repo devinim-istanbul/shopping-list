@@ -2,11 +2,21 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "pre-commit": "npm test",
+    "precommit": "lint-staged",
     "test": "node_modules/.bin/jest",
     "appr": "appr",
+    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "eslint": "eslint –config ./src/ --ignore-pattern '!.eslintrc.js'",
+    "prettier": "prettier --single-quote --write 'src/**/*.js'",
     "encrypt": "encrypt config.json config.json.secret",
     "decrypt": "decrypt config.json.secret config.json"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint –config ./src/ --ignore-pattern '!.eslintrc.js' --fix",
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "jest": {
     "preset": "jest-expo"
@@ -25,7 +35,17 @@
   },
   "devDependencies": {
     "appr": "^2.0.0",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "exp": "^53.1.0",
-    "jest-expo": "^27.0.1"
+    "husky": "^0.14.3",
+    "jest-expo": "^27.0.1",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1"
   }
 }
