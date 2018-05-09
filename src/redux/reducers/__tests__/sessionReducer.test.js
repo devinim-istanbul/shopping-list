@@ -4,7 +4,7 @@ import { SESSION } from '../../types';
 describe('sessionReducer reducer', () => {
     it('should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual({
-                house: {},
+                house: null,
             }
         )
     });
@@ -34,7 +34,7 @@ describe('sessionReducer reducer', () => {
         expect(reducer({}, {
             type: SESSION.DELETE_HOUSE_FROM_SESSION
         })).toEqual({
-                house: {}
+                house: null
             }
         )
     });

@@ -1,7 +1,7 @@
 import { SESSION } from "../types";
 
 const INITIAL_STATE = {
-    house: {},
+    house: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
