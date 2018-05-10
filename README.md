@@ -16,6 +16,11 @@ then, change directory to project's folder and install dependencies with
 ```
 npm install
 ```
+then, we are use expo, you need install exp
+
+```
+npm install -g exp
+```
 
 then, simply use
 
