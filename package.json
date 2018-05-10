@@ -2,14 +2,14 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "precommit": "lint-staged",
+    "precommit": "lint-staged | npm test",
     "test": "node_modules/.bin/jest",
     "appr": "appr",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
     "eslint": "eslint –config ./src/ --ignore-pattern '!.eslintrc.js'",
-    "prettier": "prettier --single-quote --write 'src/**/*.js'",
-    "encrypt": "encrypt config.json config.json.secret",
-    "decrypt": "decrypt config.json.secret config.json"
+    "prettier": "prettier --single-quote --write '**/**/*.js'",
+    "encrypt": "encrypt config.json secret/config.json.secret",
+    "decrypt": "decrypt secret/config.json.secret config.json"
   },
   "lint-staged": {
     "*.js": [
@@ -22,16 +22,21 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/spawn-async": "^1.3.0",
     "config-leaf": "^0.3.0",
     "expo": "^27.0.1",
     "firebase": "^4.13.1",
+    "mkdirp": "^0.5.1",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^2.0.0-rc.9",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2",
+    "sentry-cli-binary": "^1.25.0",
+    "sentry-expo": "^1.7.0"
   },
   "devDependencies": {
     "appr": "^2.0.0",
