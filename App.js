@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Sentry from 'sentry-expo';
 
-// Redux
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
-// Firebase
 import firebase from 'firebase';
 
 import config from './config';
@@ -19,6 +18,8 @@ export default class App extends React.Component {
   constructor() {
     super();
     console.ignoredYellowBox = ['Setting a timer'];
+    Sentry.enableInExpoDevelopment = true;
+    Sentry.config(config.sentry.publicDSN).install();
   }
 
   componentWillMount() {

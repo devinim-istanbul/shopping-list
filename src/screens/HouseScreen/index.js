@@ -26,10 +26,6 @@ class HouseScreen extends React.Component {
   }
 }
 
-const mapStateToProps = () => ({
-  test: 1
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   navigateBySessionState
 })(HouseScreen);

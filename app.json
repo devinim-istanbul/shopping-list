@@ -9,6 +9,17 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "./sentry",
+          "config": {
+            "organization": "devinim",
+            "project": "shopping-list"
+          }
+        }
+      ]
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

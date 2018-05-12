@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, UIManager, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import ShoppingList from './ShoppingList';
 
@@ -12,6 +12,14 @@ class ListScreen extends React.Component {
 
   componentDidMount() {
     this.props.loadShoppinglistEventsFromFirestore();
+  }
+
+  componentWillUpdate() {
+    if (UIManager.setLayoutAnimationEnabledExperimental)
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    if (this.props.shoppingList) {
+      LayoutAnimation.spring();
+    }
   }
 
   render() {
