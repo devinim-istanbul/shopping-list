@@ -22,10 +22,27 @@ class ListScreen extends React.Component {
     }
   }
 
+  onAdd = item => {
+    console.log('Add', item);
+  };
+
+  onSubtract = item => {
+    console.log('Subtract', item);
+  };
+
+  onNewItem = () => {
+    console.log('new');
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <ShoppingList list={this.props.shoppingList} onAddItem={() => {}} />
+        <ShoppingList
+          list={this.props.shoppingList}
+          onAdd={this.onAdd}
+          onSubtract={this.onSubtract}
+          onNewItem={this.onNewItem}
+        />
       </View>
     );
   }
