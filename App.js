@@ -18,7 +18,6 @@ export default class App extends React.Component {
   constructor() {
     super();
     console.ignoredYellowBox = ['Setting a timer'];
-    Sentry.enableInExpoDevelopment = true;
     Sentry.config(config.sentry.publicDSN).install();
   }
 

@@ -31,6 +31,21 @@ describe('shoppingListActions actions', () => {
           name: 'Elma',
           quantity: 4
         }
+      },
+      {
+        type: 'REMOVE_ITEM',
+        payload: {
+          id: 2
+        }
+      },
+      {
+        type: 'ADD_ITEM',
+        payload: {
+          done: false,
+          id: 3,
+          name: 'Bisküvi',
+          quantity: 3
+        }
       }
     ];
 
@@ -45,8 +60,8 @@ describe('shoppingListActions actions', () => {
         },
         {
           done: false,
-          id: 2,
-          name: 'Bira',
+          id: 3,
+          name: 'Bisküvi',
           quantity: 3
         }
       ]

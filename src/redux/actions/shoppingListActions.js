@@ -22,24 +22,26 @@ export const loadShoppinglistEventsFromFirestore = () => (
 };
 
 export const generateShoppingList = shoppingListActions => {
-  const shoppingList = shoppingListActions.reduce((list, action) => {
-    if (!action.type) return list;
-    switch (action.type) {
-      case 'ADD_ITEM':
-        return addItem(list, action.payload);
-      case 'REMOVE_ITEM':
-        return removeItem(list, action.payload);
-      case 'EDIT_ITEM':
-        return editItem(list, action.payload);
-      default:
-        return list;
-    }
-  }, []);
+  const shoppingList = shoppingListActions.reduce(modifyList, []);
 
   return {
     type: SHOPPING_LIST.SET_LIST,
     payload: shoppingList
   };
+};
+
+const modifyList = (list, action) => {
+  if (!action.type) return list;
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return addItem(list, action.payload);
+    case 'REMOVE_ITEM':
+      return removeItem(list, action.payload);
+    case 'EDIT_ITEM':
+      return editItem(list, action.payload);
+    default:
+      return list;
+  }
 };
 
 const addItem = (list, item) => {
