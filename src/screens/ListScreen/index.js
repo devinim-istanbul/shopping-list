@@ -3,7 +3,10 @@ import { View, UIManager, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import ShoppingList from './ShoppingList';
 
-import { loadShoppinglistEventsFromFirestore } from '../../redux/actions';
+import {
+  loadShoppinglistEventsFromFirestore,
+  pushShoppinglistEventToFirestore
+} from '../../redux/actions';
 
 class ListScreen extends React.Component {
   static navigationOptions = {
@@ -24,6 +27,10 @@ class ListScreen extends React.Component {
 
   onAdd = item => {
     console.log('Add', item);
+    this.props.pushShoppinglistEventToFirestore({
+      type: 'INCREMENT_QUANTITY',
+      payload: item
+    });
   };
 
   onSubtract = item => {
@@ -32,6 +39,14 @@ class ListScreen extends React.Component {
 
   onNewItem = () => {
     console.log('new');
+    this.props.pushShoppinglistEventToFirestore({
+      type: 'ADD_ITEM',
+      payload: {
+        name: 'Elma',
+        done: false,
+        quantity: 3
+      }
+    });
   };
 
   render() {
@@ -62,5 +77,6 @@ const mapStateToProps = ({ shoppingListStore }) => {
 };
 
 export default connect(mapStateToProps, {
-  loadShoppinglistEventsFromFirestore
+  loadShoppinglistEventsFromFirestore,
+  pushShoppinglistEventToFirestore
 })(ListScreen);

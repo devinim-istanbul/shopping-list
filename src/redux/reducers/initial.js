@@ -5,5 +5,5 @@ export const SESSION_INITIAL_STATE = {
 };
 
 export const SHOPPING_INITIAL_STATE = {
-  shoppingList: null
+  shoppingList: []
 };
