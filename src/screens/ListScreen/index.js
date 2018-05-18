@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, UIManager, LayoutAnimation } from 'react-native';
+import { View, AppState, UIManager, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import ShoppingList from './ShoppingList';
 
 import {
   loadShoppinglistEventsFromFirestore,
-  pushShoppinglistEventToFirestore
+  pushShoppinglistEventToFirestore,
+  generateSnaphostInFirestore
 } from '../../redux/actions';
+import { SHOPPING_LIST } from "../../redux/types";
 
 class ListScreen extends React.Component {
   static navigationOptions = {
@@ -15,32 +17,54 @@ class ListScreen extends React.Component {
 
   componentDidMount() {
     this.props.loadShoppinglistEventsFromFirestore();
+
+    AppState.addEventListener('change', state => {
+      if (state === 'background' || state === 'inactive') {
+        this.props.generateSnaphostInFirestore();
+      }
+    });
   }
 
   componentWillUpdate() {
     if (UIManager.setLayoutAnimationEnabledExperimental)
       UIManager.setLayoutAnimationEnabledExperimental(true);
     if (this.props.shoppingList) {
-      LayoutAnimation.spring();
+      LayoutAnimation.linear();
     }
   }
 
+  componentWillUnmount() {
+    AppState.removeEventListener('change', state => {
+      if (state === 'background' || state === 'inactive') {
+        this.props.generateSnaphostInFirestore();
+      }
+    });
+  }
+
   onAdd = item => {
-    console.log('Add', item);
     this.props.pushShoppinglistEventToFirestore({
-      type: 'INCREMENT_QUANTITY',
+      type: SHOPPING_LIST.INCREMENT_QUANTITY,
       payload: item
     });
   };
 
   onSubtract = item => {
-    console.log('Subtract', item);
+    this.props.pushShoppinglistEventToFirestore({
+      type: SHOPPING_LIST.DECREMENT_QUANTITY,
+      payload: item
+    });
+  };
+
+  onToggle = item => {
+    this.props.pushShoppinglistEventToFirestore({
+      type: SHOPPING_LIST.EDIT_ITEM,
+      payload: { ...item, done: !item.done }
+    });
   };
 
   onNewItem = () => {
-    console.log('new');
     this.props.pushShoppinglistEventToFirestore({
-      type: 'ADD_ITEM',
+      type: SHOPPING_LIST.ADD_ITEM,
       payload: {
         name: 'Elma',
         done: false,
@@ -57,6 +81,7 @@ class ListScreen extends React.Component {
           onAdd={this.onAdd}
           onSubtract={this.onSubtract}
           onNewItem={this.onNewItem}
+          onToggle={this.onToggle}
         />
       </View>
     );
@@ -78,5 +103,6 @@ const mapStateToProps = ({ shoppingListStore }) => {
 
 export default connect(mapStateToProps, {
   loadShoppinglistEventsFromFirestore,
-  pushShoppinglistEventToFirestore
+  pushShoppinglistEventToFirestore,
+  generateSnaphostInFirestore
 })(ListScreen);
