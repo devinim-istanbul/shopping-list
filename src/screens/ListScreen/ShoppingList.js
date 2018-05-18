@@ -1,21 +1,18 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
-import ShoppingLine from './ShoppingLine';
+import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = props => {
   const { list, onNewItem } = props;
   if (!list) return true;
   return (
     <View style={styles.container}>
-      <ScrollView
+      <View
         style={styles.scrollContainer}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
       >
         {renderList(props)}
-        <View style={styles.scrollExtraFooter} />
-      </ScrollView>
+      </View>
       <Icon
         raised
         reverse
@@ -29,15 +26,20 @@ const ShoppingList = props => {
   );
 };
 
-const renderList = ({ list, onAdd, onSubtract }) =>
-  list.map(item => (
-    <ShoppingLine
-      key={item.name}
+const renderList = ({ list, onAdd, onSubtract, onToggle }) =>
+  <FlatList
+    data={list}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+    keyExtractor={item => item.id}
+    contentContainerStyle={styles.contentContainerStyle}
+    renderItem={({item}) => <ShoppingItem
       lineItem={item}
       onAdd={onAdd}
       onSubtract={onSubtract}
-    />
-  ));
+      onToggle={onToggle}
+    />}
+  />;
 
 const common = {
   margin: 20
@@ -55,9 +57,9 @@ const styles = {
   scrollContainer: {
     position: 'absolute',
     left: common.margin,
-    top: common.margin,
     bottom: 0,
-    right: common.margin
+    right: common.margin,
+    top: 0,
   },
   innerContainer: {},
   addButton: {
@@ -65,8 +67,11 @@ const styles = {
     alignSelf: 'center',
     bottom: 0
   },
-  scrollExtraFooter: {
-    height: 65
+  contentContainerStyle: {
+    paddingBottom: 65,
+    paddingTop: common.margin,
+
+
   }
 };
 
