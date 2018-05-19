@@ -7,3 +7,7 @@ export const SESSION_INITIAL_STATE = {
 export const SHOPPING_INITIAL_STATE = {
   shoppingList: []
 };
+
+export const USER_INITIAL_STATE = {
+  user: {}
+};
