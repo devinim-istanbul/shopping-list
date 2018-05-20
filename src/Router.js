@@ -10,7 +10,7 @@ const Router = createStackNavigator(
     List: { screen: ListScreen }
   },
   {
-    initialRouteName: 'List',
+    initialRouteName: 'House',
     navigationOptions: {
       headerStyle: {
         backgroundColor: '#6bc035',
