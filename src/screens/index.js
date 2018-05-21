@@ -1,5 +1,5 @@
-import HouseScreen from './HouseScreen';
+import { SignInScreen, SignUpScreen } from './LoginScreen';
 import ButtonScreen from './ButtonScreen';
 import ListScreen from './ListScreen';
 
-export { HouseScreen, ButtonScreen, ListScreen };
+export { SignInScreen, SignUpScreen, ButtonScreen, ListScreen };
