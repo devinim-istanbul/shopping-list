@@ -1,8 +1,8 @@
 import firebase from 'firebase';
 
-import { USER } from '../types';
+import { SESSION } from '../types';
 
-const { SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_USER } = USER;
+const { SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_USER } = SESSION;
 
 export const signUp = (email, password) => async (
   dispatch

@@ -1,8 +1,8 @@
 import reducer from '../userReducer';
-import { USER } from '../../types';
+import { SESSION } from '../../types';
 import { USER_INITIAL_STATE } from '../initial';
 
-const { SIGN_UP, SIGN_IN, SIGN_OUT } = USER;
+const { SIGN_UP, SIGN_IN, SIGN_OUT } = SESSION;
 
 describe('userReducer reducer', () => {
   it('should return the initial state', () => {

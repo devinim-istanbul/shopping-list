@@ -1,7 +1,7 @@
-import { USER } from '../types';
+import { SESSION } from '../types';
 import { USER_INITIAL_STATE } from './initial';
 
-const { SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_USER } = USER;
+const { SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_USER } = SESSION;
 
 export default (state = USER_INITIAL_STATE, action) => {
   switch (action.type) {

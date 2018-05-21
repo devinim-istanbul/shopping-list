@@ -7,12 +7,15 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 import firebase from 'firebase';
+import observe from './src/observable';
 
 import config from './config';
 import reducers from './src/redux/reducers';
 import Router from './src/Router';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+observe(store);
 
 export default class App extends React.Component {
   constructor() {
