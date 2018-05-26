@@ -7,5 +7,5 @@ import userReducer from './userReducer';
 export default combineReducers({
   sessionStore: sessionReducer,
   shoppingListStore: shoppingListReducer,
-  userStore: userReducer
+  userStore: userReducer,
 });

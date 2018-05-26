@@ -1,4 +1,4 @@
-import { USER } from '../types';
+import { USER, INITIALIZE } from '../types';
 import { USER_INITIAL_STATE } from './initial';
 
 const { SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_USER } = USER;
@@ -13,6 +13,8 @@ export default (state = USER_INITIAL_STATE, action) => {
       return { ...state, user: {} };
     case UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };
+    case INITIALIZE:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

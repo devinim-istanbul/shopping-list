@@ -8,14 +8,15 @@ import Header from './shopping-list/Header';
 import {
   loadShoppinglistEventsFromFirestore,
   pushShoppinglistEventToFirestore,
-  generateSnaphostInFirestore
+  generateSnaphostInFirestore,
+  signOut
 } from '../../redux/actions';
 
 import { SHOPPING_LIST } from '../../redux/types';
 
 class ListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const signOut = () => {
+    const signOutNavigator = () => {
       const action = StackActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: 'SignIn' })]
@@ -23,9 +24,16 @@ class ListScreen extends React.Component {
       navigation.dispatch(action);
     };
     return {
-      header: <Header rightAction={() => signOut()} />
+      header: <Header rightAction={() => {
+        navigation.state.params.signOut();
+        signOutNavigator();
+      }} />
     };
   };
+
+  componentWillMount = () => {
+    this.props.navigation.setParams({ signOut: this.props.signOut });
+  }
 
   componentDidMount() {
     this.props.loadShoppinglistEventsFromFirestore();
@@ -35,6 +43,19 @@ class ListScreen extends React.Component {
         this.props.generateSnaphostInFirestore();
       }
     });
+  }
+
+  // A rather hacky solution that will be fixed once we figure out a way to handle routing.
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.user.token) {
+      nextProps.navigation.dispatch(StackActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'SignIn' }),
+          ]
+        })
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -108,15 +129,18 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ shoppingListStore }) => {
+const mapStateToProps = ({ shoppingListStore, userStore }) => {
   const { shoppingList } = shoppingListStore;
+  const { user } = userStore;
   return {
-    shoppingList
+    shoppingList,
+    user
   };
 };
 
 export default connect(mapStateToProps, {
   loadShoppinglistEventsFromFirestore,
   pushShoppinglistEventToFirestore,
-  generateSnaphostInFirestore
+  generateSnaphostInFirestore,
+  signOut
 })(ListScreen);
