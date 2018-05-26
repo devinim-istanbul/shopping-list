@@ -80,7 +80,7 @@ const styles= {
     backgroundColor: '#fff',
   },
   contentContainer: {
-    flex: 4,
+    flex: 3,
   },
   signUpButton: {
     backgroundColor: 'transparent',

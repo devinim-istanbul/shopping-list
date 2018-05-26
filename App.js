@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import Sentry from 'sentry-expo';
 
 import { createStore, applyMiddleware } from 'redux';
@@ -29,9 +29,9 @@ export default class App extends React.Component {
   renderApp() {
     if (this.state.appLoaded) {
       return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <Router />
-        </View>
+        </SafeAreaView>
       );
     }
     return <Text>Loading...</Text>;

@@ -26,11 +26,6 @@ class ListScreen extends React.Component {
   }
 
   componentWillUpdate() {
-    if (UIManager.setLayoutAnimationEnabledExperimental)
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    if (this.props.shoppingList) {
-      LayoutAnimation.linear();
-    }
   }
 
   componentWillUnmount() {
@@ -73,15 +68,27 @@ class ListScreen extends React.Component {
     });
   };
 
+  onRemoveItem = item => {
+    this.props.pushShoppinglistEventToFirestore({
+      type: SHOPPING_LIST.REMOVE_ITEM,
+      payload: {
+        id: item.id
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <ShoppingList
+          itemProps={{
+            onAdd: this.onAdd,
+            onSubtract: this.onSubtract,
+            onNewItem: this.onNewItem,
+            onRemoveItem: this.onRemoveItem,
+            onToggle: this.onToggle
+          }}
           list={this.props.shoppingList}
-          onAdd={this.onAdd}
-          onSubtract={this.onSubtract}
-          onNewItem={this.onNewItem}
-          onToggle={this.onToggle}
         />
       </View>
     );

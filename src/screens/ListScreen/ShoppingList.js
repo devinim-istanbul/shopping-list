@@ -1,43 +1,42 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
-import ShoppingItem from './ShoppingItem';
+import ListItem from './ListItem';
 
 const ShoppingList = props => {
-  const { list, onNewItem } = props;
+  const { list, itemProps } = props;
   if (!list) return true;
   return (
     <View style={styles.container}>
       <View
         style={styles.scrollContainer}
       >
-        {renderList(props)}
+        {renderList(props, itemProps)}
       </View>
+
       <Icon
-        raised
         reverse
         name="plus"
         type="font-awesome"
         color="#55ab2b"
         containerStyle={styles.addButton}
-        onPress={onNewItem}
+        onPress={itemProps.onNewItem}
       />
     </View>
   );
 };
 
-const renderList = ({ list, onAdd, onSubtract, onToggle }) =>
+const renderList = (props, itemProps) =>
   <FlatList
-    data={list}
+    style={styles.flatList}
+    data={props.list}
     showsHorizontalScrollIndicator={false}
     showsVerticalScrollIndicator={false}
     keyExtractor={item => item.id}
     contentContainerStyle={styles.contentContainerStyle}
-    renderItem={({item}) => <ShoppingItem
-      lineItem={item}
-      onAdd={onAdd}
-      onSubtract={onSubtract}
-      onToggle={onToggle}
+    renderItem={({ item }) => <ListItem
+      item={item}
+      {...itemProps}
     />}
   />;
 
@@ -52,26 +51,28 @@ const styles = {
     top: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: '#f2f2f2'
+    backgroundColor: '#f2f2f2',
   },
   scrollContainer: {
     position: 'absolute',
-    left: common.margin,
-    bottom: 0,
-    right: common.margin,
+    left: 0,
     top: 0,
+    bottom: 0,
+    right: 0,
   },
   innerContainer: {},
   addButton: {
     position: 'absolute',
     alignSelf: 'center',
-    bottom: 0
+    bottom: 0,
+    right: 0,
   },
   contentContainerStyle: {
     paddingBottom: 65,
-    paddingTop: common.margin,
 
 
+  },
+  flatList: {
   }
 };
 
