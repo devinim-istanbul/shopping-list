@@ -66,7 +66,7 @@ export const pushShoppinglistEventToFirestore = (event) => (
     ...event,
     payload: {
       ...event.payload,
-      TEST_USER
+      user: TEST_USER
     }
   };
 

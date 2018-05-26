@@ -5,7 +5,7 @@ export default (state = SHOPPING_INITIAL_STATE, action) => {
 
   switch (action.type) {
     case SHOPPING_LIST.SET_LIST:
-      return { ...state, shoppingList: action.payload };
+      return { ...state, shoppingList: action.payload || [] };
     case SHOPPING_LIST.ADD_ITEM:
       return { ...state, shoppingList: addItem(state.shoppingList, action.payload) };
     case SHOPPING_LIST.EDIT_ITEM:
