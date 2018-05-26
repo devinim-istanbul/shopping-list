@@ -14,7 +14,8 @@ export default {
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: common.imagePadding,
-    height: 280,
+    flex: 1,
+    minHeight: common.imageHeight + common.imagePadding * 2
   },
   image: {
     height: common.imageHeight,
