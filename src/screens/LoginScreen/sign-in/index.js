@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-import { NavigationActions, StackActions } from "react-navigation";
+import { View, StatusBar } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { LoginInput, LoginButton, LoginImage } from "../components";
-import { signIn } from "../../../redux/actions";
+import { LoginInput, LoginButton, LoginImage } from '../components';
+import { signIn } from '../../../redux/actions';
+import { globalStyles } from '../../../globals';
 
 class SignInScreen extends React.Component {
   static navigationOptions = {
@@ -20,13 +21,13 @@ class SignInScreen extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.user.token) this.navigate();
+    if (newProps.user.token) this.navigate();
   }
 
   navigate = () => {
     const action = StackActions.reset({
       index: 0,
-      actions: [ NavigationActions.navigate({ routeName: "List" }) ]
+      actions: [NavigationActions.navigate({ routeName: 'List' })]
     });
     this.props.navigation.dispatch(action);
   };
@@ -35,38 +36,57 @@ class SignInScreen extends React.Component {
     this.props.navigation.navigate('SignUp');
   };
 
-  render(){
+  render() {
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor="#fff"
+          translucent={false}
+        />
         <LoginImage />
         <View style={styles.contentContainer}>
           <View style={styles.formContainer}>
             <LoginInput
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
-              placeholder='E-mail'
+              placeholder="E-mail"
+              icon="user"
               keyboardType="email-address"
             />
             <LoginInput
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
-              placeholder='Password'
+              placeholder="Password"
+              icon="lock"
               secureTextEntry
             />
             <LoginButton
-              onPress={() => this.props.signIn(this.state.email, this.state.password)}
-              text='Sign In'
+              onPress={() =>
+                this.props.signIn(this.state.email, this.state.password)
+              }
+              text="Sign In"
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              text='Sign Up'
+              icon="google-plus"
+              style={{ backgroundColor: globalStyles.googleColor }}
+            />
+            <LoginButton
+              onPress={() => this.navigateSignUp()}
+              icon="facebook"
+              style={{ backgroundColor: globalStyles.facebookColor }}
+            />
+            <LoginButton
+              onPress={() => this.navigateSignUp()}
+              text="Sign Up"
               style={styles.signUpButton}
               textStyle={styles.signUpButtonText}
             />
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -74,19 +94,19 @@ const mapStateToProps = ({ userStore }) => ({
   user: userStore.user
 });
 
-const styles= {
+const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   contentContainer: {
-    flex: 3,
+    flex: 6
   },
   signUpButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   signUpButtonText: {
-    color: '#7ED321'
+    color: globalStyles.primaryColor
   }
 };
 

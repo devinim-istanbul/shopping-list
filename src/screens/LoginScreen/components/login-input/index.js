@@ -1,18 +1,23 @@
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
-import styles from "../../styles/index";
+import commonStyles from '../../styles/index';
+import { globalStyles } from '../../../../globals';
 
-export default (props) =>
-  <View style={styles.inputContainer}>
-    <View style={[styles.inputWrapper, styles.textInputWrapper]}>
-      <TextInput
-        autoCorrect={false}
-        autoCapitalize="none"
-        returnKeyType="next"
-        underlineColorAndroid="transparent"
-        placeholderTextColor='#7ED321'
-        {...props}
-      />
-    </View>
-  </View>;
+export default props => (
+  <View style={commonStyles.inputContainer}>
+    <Input
+      containerStyle={{ width: '100%', paddingLeft: 10, paddingRight: 10 }}
+      placeholder={props.placeholder}
+      autoCorrect={false}
+      autoCapitalize="none"
+      returnKeyType="next"
+      leftIcon={
+        <Icon name={props.icon} size={24} color={globalStyles.primaryColor} />
+      }
+      {...props}
+    />
+  </View>
+);
