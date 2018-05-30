@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationActions, StackActions } from "react-navigation";
+import { View } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { LoginInput, LoginButton } from "../components";
-import { signUp } from "../../../redux/actions";
+import { LoginInput, LoginButton } from '../components';
+import { signUp } from '../../../redux/actions';
 
 class SignInScreen extends React.Component {
   static navigationOptions = {
@@ -20,22 +20,22 @@ class SignInScreen extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.user.token) this.navigate();
+    if (newProps.user.token) this.navigate();
   }
 
   navigate = () => {
     const action = StackActions.reset({
       index: 0,
-      actions: [ NavigationActions.navigate({ routeName: "List" }) ]
+      actions: [NavigationActions.navigate({ routeName: 'List' })]
     });
     this.props.navigation.dispatch(action);
   };
 
   signIn(email, password) {
-    this.props.signUp(email, password, name);
+    this.props.signUp(email, password);
   }
 
-  render(){
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -43,29 +43,34 @@ class SignInScreen extends React.Component {
             <LoginInput
               value={this.state.name}
               onChangeText={name => this.setState({ name })}
-              placeholder='Name'
+              placeholder="Name"
+              icon="user"
               keyboardType="email-address"
             />
             <LoginInput
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
-              placeholder='E-mail'
+              placeholder="E-mail"
+              icon="envelope"
               keyboardType="email-address"
             />
             <LoginInput
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
-              placeholder='Password'
+              placeholder="Password"
+              icon="lock"
               secureTextEntry
             />
             <LoginButton
-              onPress={() => this.props.signUp(this.state.email, this.state.password)}
-              text='Sign Up'
+              onPress={() =>
+                this.props.signUp(this.state.email, this.state.password)
+              }
+              text="Sign Up"
             />
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -73,13 +78,13 @@ const mapStateToProps = ({ userStore }) => ({
   user: userStore.user
 });
 
-const styles= {
+const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   contentContainer: {
-    flex: 4,
+    flex: 4
   }
 };
 

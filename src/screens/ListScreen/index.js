@@ -1,18 +1,30 @@
 import React from 'react';
-import { View, AppState, UIManager, LayoutAnimation } from 'react-native';
+import { View, AppState } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import ShoppingList from './ShoppingList';
+import ShoppingList from './shopping-list';
+import Header from './shopping-list/Header';
 
 import {
   loadShoppinglistEventsFromFirestore,
   pushShoppinglistEventToFirestore,
   generateSnaphostInFirestore
 } from '../../redux/actions';
-import { SHOPPING_LIST } from "../../redux/types";
+
+import { SHOPPING_LIST } from '../../redux/types';
 
 class ListScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Shopping List'
+  static navigationOptions = ({ navigation }) => {
+    const signOut = () => {
+      const action = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'SignIn' })]
+      });
+      navigation.dispatch(action);
+    };
+    return {
+      header: <Header rightAction={() => signOut()} />
+    };
   };
 
   componentDidMount() {
@@ -25,10 +37,8 @@ class ListScreen extends React.Component {
     });
   }
 
-  componentWillUpdate() {
-  }
-
   componentWillUnmount() {
+    this.props.navigation.setParams({ signOut: this.signOut });
     AppState.removeEventListener('change', state => {
       if (state === 'background' || state === 'inactive') {
         this.props.generateSnaphostInFirestore();
@@ -36,14 +46,14 @@ class ListScreen extends React.Component {
     });
   }
 
-  onAdd = item => {
+  onIncrement = item => {
     this.props.pushShoppinglistEventToFirestore({
       type: SHOPPING_LIST.INCREMENT_QUANTITY,
       payload: item
     });
   };
 
-  onSubtract = item => {
+  onDecrement = item => {
     this.props.pushShoppinglistEventToFirestore({
       type: SHOPPING_LIST.DECREMENT_QUANTITY,
       payload: item
@@ -57,14 +67,11 @@ class ListScreen extends React.Component {
     });
   };
 
-  onNewItem = () => {
+  onSaveItem = item => {
+    const type = item.id ? SHOPPING_LIST.EDIT_ITEM : SHOPPING_LIST.ADD_ITEM;
     this.props.pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.ADD_ITEM,
-      payload: {
-        name: 'Elma',
-        done: false,
-        quantity: 3
-      }
+      type,
+      payload: item
     });
   };
 
@@ -82,12 +89,12 @@ class ListScreen extends React.Component {
       <View style={styles.container}>
         <ShoppingList
           itemProps={{
-            onAdd: this.onAdd,
-            onSubtract: this.onSubtract,
-            onNewItem: this.onNewItem,
+            onIncrement: this.onIncrement,
+            onDecrement: this.onDecrement,
             onRemoveItem: this.onRemoveItem,
             onToggle: this.onToggle
           }}
+          onSaveItem={this.onSaveItem}
           list={this.props.shoppingList}
         />
       </View>
