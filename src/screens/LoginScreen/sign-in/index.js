@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton, LoginImage } from '../components';
-import { signIn } from '../../../redux/actions';
+import { signIn, initialize } from '../../../redux/actions';
 import { globalStyles } from '../../../globals';
 
 class SignInScreen extends React.Component {
@@ -15,13 +15,19 @@ class SignInScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email: 'cezmikalorifer@pastirmatadindapaylasimlar.com',
+      password: 'czmklrfr',
+      loading: true
     };
+  }
+
+  async componentWillMount() {
+    await this.props.initialize();
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.user.token) this.navigate();
+    else this.setState({ loading: false });
   }
 
   navigate = () => {
@@ -37,7 +43,15 @@ class SignInScreen extends React.Component {
   };
 
   render() {
-    return (
+    const loading = (
+      <View>
+        <Text>
+          Loading...
+        </Text>
+      </View>
+    );
+
+    const content = (
       <View style={styles.container}>
         <StatusBar
           barStyle="dark-content"
@@ -86,7 +100,9 @@ class SignInScreen extends React.Component {
           </View>
         </View>
       </View>
-    );
+    )
+
+    return this.state.loading ? loading : content;
   }
 }
 
@@ -110,4 +126,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, { signIn })(SignInScreen);
+export default connect(mapStateToProps, { signIn, initialize })(SignInScreen);
