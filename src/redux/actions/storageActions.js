@@ -8,19 +8,19 @@ export const saveUserToStorage = async ({ type, payload }) => {
   switch (type) {
     case SIGN_UP:
       await setUserToStore(payload);
-      break;
+      return;
     case SIGN_IN:
       await setUserToStore(payload);
-      break;
+      return;
     case SIGN_OUT:
       await setUserToStore({});
-      break;
+      return;
     case UPDATE_USER:
       user = await getUserFromStore();
-      await setUserToStore({ ...user, ...payload });
-      break;
+      await setUserToStore({ ...JSON.parse(user), ...payload });
+      
     default:
-      break;
+      
   }
 }
 
