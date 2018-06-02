@@ -4,9 +4,9 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton } from '../components';
-import { signUp } from '../../../redux/actions';
+import { signUp, updateUser } from '../../../redux/actions';
 
-class SignInScreen extends React.Component {
+class SignUpScreen extends React.Component {
   static navigationOptions = {
     title: 'Sign Up'
   };
@@ -14,8 +14,10 @@ class SignInScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      name: 'Cezmi Kalorifer',
+      email: 'cezmikalorifer@pastirmatadindapaylasimlar.com',
+      password: 'czmklrfr',
+      photoURL: ''
     };
   }
 
@@ -31,8 +33,13 @@ class SignInScreen extends React.Component {
     this.props.navigation.dispatch(action);
   };
 
-  signIn(email, password) {
-    this.props.signUp(email, password);
+  async signUp(email, password, name, photoURL) {
+    const { signUp, updateUser } = this.props;
+    await signUp(email, password);
+    await updateUser({
+      displayName: name,
+      photoURL
+    });
   }
 
   render() {
@@ -45,7 +52,14 @@ class SignInScreen extends React.Component {
               onChangeText={name => this.setState({ name })}
               placeholder="Name"
               icon="user"
-              keyboardType="email-address"
+              keyboardType="default"
+            />
+            <LoginInput
+              value={this.state.photoURL}
+              onChangeText={photoURL => this.setState({ photoURL })}
+              placeholder="Photo URL"
+              icon="user"
+              keyboardType="default"
             />
             <LoginInput
               value={this.state.email}
@@ -63,7 +77,12 @@ class SignInScreen extends React.Component {
             />
             <LoginButton
               onPress={() =>
-                this.props.signUp(this.state.email, this.state.password)
+                this.signUp(
+                  this.state.email,
+                  this.state.password,
+                  this.state.name,
+                  this.state.photoURL
+                )
               }
               text="Sign Up"
             />
@@ -88,4 +107,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, { signUp })(SignInScreen);
+export default connect(mapStateToProps, { signUp, updateUser })(SignUpScreen);

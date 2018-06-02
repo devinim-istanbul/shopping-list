@@ -79,13 +79,16 @@ export const updateUser = fields => async dispatch => {
       .auth()
       .currentUser.updateProfile({ ...fields });
 
-    const action = {
-      type: UPDATE_USER,
-      payload: { ...fields }
-    };
+      const action = {
+        type: UPDATE_USER,
+        payload: {
+          name: fields.displayName,
+          photoURL: fields.photoURL
+        }
+      };
 
-    await saveUserToStorage(action);
-    dispatch(action);
+      await saveUserToStorage(action);
+      dispatch(action);
   } catch (error) {
     console.log(error.code, error.message);
   }

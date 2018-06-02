@@ -120,8 +120,8 @@ const LeftBottomContainer = props => (
 
 const LeftBottomLeftContainer = ({ user }) => {
   const content =
-    user && user.avatar ? (
-      <Image source={{ uri: user.avatar }} style={styles.leftBottomLeftImage} />
+    user && user.photoURL ? (
+      <Image source={{ uri: user.photoURL }} style={styles.leftBottomLeftImage} />
     ) : null;
   return <View style={styles.leftBottomLeftContainer}>{content}</View>;
 };

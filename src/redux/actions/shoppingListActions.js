@@ -1,17 +1,6 @@
 import firebase from 'firebase';
 import { SHOPPING_LIST } from '../types';
 
-
-/*
- * TODO: Will be replaced after user implementation is completed
- * @type {{id: number, name: string, avatar: string}}
- */
-const TEST_USER = {
-  id: 1,
-  name: 'Berkan Yavri',
-  avatar: 'https://scontent.fist1-1.fna.fbcdn.net/v/t1.0-9/971421_546359168791570_1878470308_n.jpg?_nc_cat=0&oh=946ffe5d88c72eb43112349375e56da7&oe=5B7A591D'
-};
-
 export const loadShoppinglistEventsFromFirestore = () => async (
   dispatch,
   getStore
@@ -53,8 +42,9 @@ export const pushShoppinglistEventToFirestore = (event) => (
   dispatch,
   getStore
 ) => {
-  const { sessionStore } = getStore();
+  const { sessionStore, userStore } = getStore();
   const { house } = sessionStore;
+  const { user } = userStore;
 
   const ref = firebase
     .database()
@@ -66,7 +56,7 @@ export const pushShoppinglistEventToFirestore = (event) => (
     ...event,
     payload: {
       ...event.payload,
-      user: TEST_USER
+      user
     }
   };
 
