@@ -25,15 +25,15 @@ class SignInScreen extends React.Component {
     await this.props.initialize();
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.user.token) this.navigate();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.token) this.navigate();
     else this.setState({ loading: false });
   }
 
   navigate = () => {
     const action = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'List' })]
+      actions: [NavigationActions.navigate({ routeName: 'JoinHouse' })]
     });
     this.props.navigation.dispatch(action);
   };
