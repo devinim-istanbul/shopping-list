@@ -7,6 +7,8 @@ export default (state = SESSION_INITIAL_STATE, action) => {
       return { ...state, house: action.payload };
     case SESSION.DELETE_HOUSE_FROM_SESSION:
       return SESSION_INITIAL_STATE;
+    case SESSION.INITIALIZE_HOUSE:
+      return { ...state, house: action.payload };
     default:
       return state;
   }

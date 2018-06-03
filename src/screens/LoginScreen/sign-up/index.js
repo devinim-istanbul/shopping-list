@@ -28,7 +28,7 @@ class SignUpScreen extends React.Component {
   navigate = () => {
     const action = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'List' })]
+      actions: [NavigationActions.navigate({ routeName: 'JoinHouse' })]
     });
     this.props.navigation.dispatch(action);
   };

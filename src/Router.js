@@ -1,12 +1,14 @@
 import { Constants } from 'expo';
 import { createStackNavigator } from 'react-navigation';
 
-import { SignUpScreen, SignInScreen, ButtonScreen, ListScreen } from './screens';
+import { SignUpScreen, SignInScreen, ButtonScreen, ListScreen, CreateHouseScreen, JoinHouseScreen } from './screens';
 
 const Router = createStackNavigator(
   {
     SignIn: { screen: SignInScreen },
     SignUp: { screen: SignUpScreen },
+    JoinHouse: { screen: JoinHouseScreen },
+    CreateHouse: { screen: CreateHouseScreen },
     Button: { screen: ButtonScreen },
     List: { screen: ListScreen }
   },
