@@ -1,52 +1,23 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { HouseInput, HouseButton } from '../components';
 import Languages from '../../../localization';
 
-import { createHouse, initializeHouse } from '../../../redux/actions';
+import { createHouse } from '../../../redux/actions';
 
 class CreateHouseScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      houseName: '',
-      loading: true
+      houseName: ''
     };
   };
 
-  async componentWillMount() {
-    await this.props.initializeHouse();
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.house.id) this.proceed();
-    else this.setState({ loading: false });
-  }
-
-  proceed() {
-    this.props.navigation.navigate('List');
-  };
-
-  createHouse(name) {
-    this.props.createHouse(name);
-  }
-
   render() {
     const language = 'EN';
-
-    if (this.state.loading) {
-      return (
-        <View>
-          <Text>
-            Loading...
-          </Text>
-        </View>
-      )
-    }
-
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -88,4 +59,4 @@ const mapStateToProps = ({ sessionStore }) => ({
   house: sessionStore.house
 });
 
-export default connect(mapStateToProps, { createHouse, initializeHouse })(CreateHouseScreen);
+export default connect(mapStateToProps, { createHouse })(CreateHouseScreen);

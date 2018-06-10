@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import Sentry from 'sentry-expo';
 
 import { createStore, applyMiddleware } from 'redux';
@@ -12,14 +13,20 @@ import config from './config';
 import reducers from './src/redux/reducers';
 import Router from './src/Router';
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+import Navigator from './src/redux/listeners';
 
-export default class App extends React.Component {
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, Navigator));
+
+class App extends React.Component {
   constructor() {
     super();
     console.ignoredYellowBox = ['Setting a timer'];
     Sentry.config(config.sentry.publicDSN).install();
   }
+
+  state = {
+    appLoaded: false
+  };
 
   componentWillMount() {
     firebase.initializeApp(config.firebase);
@@ -47,3 +54,5 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
+
+export default App;

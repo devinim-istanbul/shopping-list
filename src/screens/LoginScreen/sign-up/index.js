@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton } from '../components';
@@ -14,32 +13,16 @@ class SignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Cezmi Kalorifer',
-      email: 'cezmikalorifer@pastirmatadindapaylasimlar.com',
-      password: 'czmklrfr',
-      photoURL: ''
+      displayName: 'Dinç Özdemir',
+      email: 'dincozdemir@gmail.com',
+      password: '12345678',
+      photoURL: 'https://scontent.fist2-2.fna.fbcdn.net/v/t1.0-9/12923114_10154183955717033_6649943181169319981_n.jpg?_nc_cat=0&oh=5042398bfbe9f34c7080fd34d762eaf2&oe=5BB6889C'
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.user.token) this.navigate();
-  }
-
-  navigate = () => {
-    const action = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'JoinHouse' })]
-    });
-    this.props.navigation.dispatch(action);
-  };
-
-  async signUp(email, password, name, photoURL) {
-    const { signUp, updateUser } = this.props;
-    await signUp(email, password);
-    await updateUser({
-      displayName: name,
-      photoURL
-    });
+  async signUp(email, password, displayName, photoURL) {
+    await this.props.signUp(email, password);
+    await this.props.updateUser({ displayName, photoURL });
   }
 
   render() {
@@ -48,8 +31,8 @@ class SignUpScreen extends React.Component {
         <View style={styles.contentContainer}>
           <View style={styles.formContainer}>
             <LoginInput
-              value={this.state.name}
-              onChangeText={name => this.setState({ name })}
+              value={this.state.displayName}
+              onChangeText={displayName => this.setState({ displayName })}
               placeholder="Name"
               icon="user"
               keyboardType="default"
@@ -80,7 +63,7 @@ class SignUpScreen extends React.Component {
                 this.signUp(
                   this.state.email,
                   this.state.password,
-                  this.state.name,
+                  this.state.displayName,
                   this.state.photoURL
                 )
               }
@@ -93,8 +76,8 @@ class SignUpScreen extends React.Component {
   }
 }
 
-const mapStateToProps = ({ userStore }) => ({
-  user: userStore.user
+const mapStateToProps = ({ sessionStore }) => ({
+  user: sessionStore.user
 });
 
 const styles = {

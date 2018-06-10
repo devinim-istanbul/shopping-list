@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton, LoginImage } from '../components';
-import { signIn, initialize } from '../../../redux/actions';
+import { signIn } from '../../../redux/actions';
 import { globalStyles } from '../../../globals';
 
 class SignInScreen extends React.Component {
@@ -12,30 +11,9 @@ class SignInScreen extends React.Component {
     header: null
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: 'cezmikalorifer@pastirmatadindapaylasimlar.com',
-      password: 'czmklrfr',
-      loading: true
-    };
-  }
-
-  async componentWillMount() {
-    await this.props.initialize();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.user.token) this.navigate();
-    else this.setState({ loading: false });
-  }
-
-  navigate = () => {
-    const action = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'JoinHouse' })]
-    });
-    this.props.navigation.dispatch(action);
+  state = {
+    email : 'dincozdemir@gmail.com',
+    password : '12345678'
   };
 
   navigateSignUp = () => {
@@ -43,19 +21,11 @@ class SignInScreen extends React.Component {
   };
 
   render() {
-    const loading = (
-      <View>
-        <Text>
-          Loading...
-        </Text>
-      </View>
-    );
-
-    const content = (
+    return (
       <View style={styles.container}>
         <StatusBar
-          barStyle="dark-content"
-          backgroundColor="#fff"
+          barStyle='dark-content'
+          backgroundColor='#fff'
           translucent={false}
         />
         <LoginImage />
@@ -64,51 +34,47 @@ class SignInScreen extends React.Component {
             <LoginInput
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
-              placeholder="E-mail"
-              icon="user"
-              keyboardType="email-address"
+              placeholder='E-mail'
+              icon='user'
+              keyboardType='email-address'
             />
             <LoginInput
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
-              placeholder="Password"
-              icon="lock"
+              placeholder='Password'
+              icon='lock'
               secureTextEntry
             />
             <LoginButton
               onPress={() =>
                 this.props.signIn(this.state.email, this.state.password)
               }
-              text="Sign In"
+              text='Sign In'
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              icon="google-plus"
+              icon='google-plus'
               style={{ backgroundColor: globalStyles.googleColor }}
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              icon="facebook"
+              icon='facebook'
               style={{ backgroundColor: globalStyles.facebookColor }}
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              text="Sign Up"
+              text='Sign Up'
               style={styles.signUpButton}
               textStyle={styles.signUpButtonText}
             />
           </View>
         </View>
       </View>
-    )
-
-    return this.state.loading ? loading : content;
+    );
   }
 }
 
-const mapStateToProps = ({ userStore }) => ({
-  user: userStore.user
-});
+const mapStateToProps = ({ sessionStore }) => ({ user: sessionStore.user });
 
 const styles = {
   container: {
@@ -126,4 +92,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, { signIn, initialize })(SignInScreen);
+export default connect(mapStateToProps, { signIn })(SignInScreen);

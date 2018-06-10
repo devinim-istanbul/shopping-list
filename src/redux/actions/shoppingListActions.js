@@ -22,7 +22,7 @@ export const loadShoppinglistEventsFromFirestore = () => async (
   firebase
     .database()
     .ref(`/houses/${house.id}/shoppingList/events`)
-    .orderByChild("timestamp").startAt(timestamp)
+    .orderByChild('timestamp').startAt(timestamp)
     .on('child_added', eventSnapshot => {
       dispatch(eventSnapshot.val());
     });
@@ -38,13 +38,12 @@ const getShoppingListFBSnapshot = async (house) => {
 };
 
 
-export const pushShoppinglistEventToFirestore = (event) => (
+export const pushShoppinglistEventToFirestore = event => (
   dispatch,
   getStore
 ) => {
-  const { sessionStore, userStore } = getStore();
-  const { house } = sessionStore;
-  const { user } = userStore;
+  const { sessionStore } = getStore();
+  const { house, user } = sessionStore;
 
   const ref = firebase
     .database()
@@ -56,13 +55,18 @@ export const pushShoppinglistEventToFirestore = (event) => (
     ...event,
     payload: {
       ...event.payload,
-      user
+      user: {
+        uid: user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL
+      }
     }
   };
 
   newEvent.payload.id = event.payload.id || key;
   newEvent.payload.timestamp = firebase.database.ServerValue.TIMESTAMP;
   newEvent.timestamp = firebase.database.ServerValue.TIMESTAMP;
+
   ref.child(key).set(newEvent);
 };
 

@@ -1,10 +1,13 @@
+import React from 'react';
 import { Constants } from 'expo';
 import { createStackNavigator } from 'react-navigation';
 
-import { SignUpScreen, SignInScreen, ButtonScreen, ListScreen, CreateHouseScreen, JoinHouseScreen } from './screens';
+import NavigatorService from './services/navigationService';
+import { EntryScreen, SignUpScreen, SignInScreen, ButtonScreen, ListScreen, CreateHouseScreen, JoinHouseScreen } from './screens';
 
-const Router = createStackNavigator(
+const Navigator = createStackNavigator(
   {
+    Entry: { screen: EntryScreen },
     SignIn: { screen: SignInScreen },
     SignUp: { screen: SignUpScreen },
     JoinHouse: { screen: JoinHouseScreen },
@@ -13,7 +16,7 @@ const Router = createStackNavigator(
     List: { screen: ListScreen }
   },
   {
-    initialRouteName: 'SignIn',
+    initialRouteName: 'Entry',
     navigationOptions: {
       headerStyle: {
         backgroundColor: '#6bc035',
@@ -27,6 +30,13 @@ const Router = createStackNavigator(
       headerMode: 'screen'
     }
   }
+);
+
+const Router = () => (
+  <Navigator
+    ref={navigatorRef => {
+      NavigatorService.initialize(navigatorRef);
+    }}/>
 );
 
 export default Router;
