@@ -7,9 +7,12 @@ const headerImage = require('../../../../assets/welcome_logo.png');
 
 const Header = ({ rightAction, leftAction }) => (
   <View style={styles.container}>
-    <LeftContainer leftAction={leftAction} />
-    <CenterContainer />
-    <RightContainer rightAction={rightAction} />
+    <View style={styles.marginContainer}/>
+    <View style={styles.mainContainer}>
+      <LeftContainer leftAction={leftAction} />
+      <CenterContainer />
+      <RightContainer rightAction={rightAction} />
+    </View>
   </View>
 );
 
@@ -46,8 +49,13 @@ const styles = {
     left: 0,
     right: 0,
     top: 0,
-    height: globalStyles.headerSize[Platform.OS],
     backgroundColor: globalStyles.headerBackgroundColor,
+  },
+  marginContainer: {
+    height: globalStyles.headerSize[Platform.OS],
+  },
+  mainContainer: {
+    height: globalStyles.headerSize[Platform.OS],
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'

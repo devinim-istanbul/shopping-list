@@ -128,8 +128,8 @@ const LeftBottomLeftContainer = ({ user }) => {
 
 const LeftBottomCenterContainer = ({ user }) => {
   const content =
-    user && user.name ? (
-      <Text style={styles.leftBottomLeftText}>{user.name}</Text>
+    user && user.displayName ? (
+      <Text style={styles.leftBottomLeftText}>{user.displayName}</Text>
     ) : null;
   return <View style={styles.leftBottomCenterContainer}>{content}</View>;
 };
@@ -187,7 +187,6 @@ const styles = {
     backgroundColor: debug ? 'yellow' : '#fff',
     borderBottomWidth: 1,
     borderColor: common.borderColor,
-    marginLeft: 10
   },
   innerContainer: {
     flex: 1,
@@ -320,10 +319,8 @@ const styles = {
     color: 'red'
   },
   firstItem: {
-    borderTopLeftRadius: 5
   },
   lastItem: {
-    borderBottomLeftRadius: 5
   }
 };
 

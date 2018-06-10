@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, AppState } from 'react-native';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { View, AppState } from "react-native";
 import { connect } from 'react-redux';
 import ShoppingList from './shopping-list';
 import Header from './shopping-list/Header';
@@ -15,25 +14,9 @@ import {
 import { SHOPPING_LIST } from '../../redux/types';
 
 class ListScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const signOutNavigator = () => {
-      const action = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'SignIn' })]
-      });
-      navigation.dispatch(action);
-    };
-    return {
-      header: <Header rightAction={() => {
-        navigation.state.params.signOut();
-        signOutNavigator();
-      }} />
-    };
-  };
-
-  componentWillMount = () => {
-    this.props.navigation.setParams({ signOut: this.props.signOut });
-  }
+  static navigationOptions = () => ({
+    header: null
+  });
 
   componentDidMount() {
     this.props.loadShoppinglistEventsFromFirestore();
@@ -45,21 +28,7 @@ class ListScreen extends React.Component {
     });
   }
 
-  // A rather hacky solution that will be fixed once we figure out a way to handle routing.
-  componentWillReceiveProps = (nextProps) => {
-    if (!nextProps.user.token) {
-      nextProps.navigation.dispatch(StackActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'SignIn' }),
-          ]
-        })
-      );
-    }
-  }
-
   componentWillUnmount() {
-    this.props.navigation.setParams({ signOut: this.signOut });
     AppState.removeEventListener('change', state => {
       if (state === 'background' || state === 'inactive') {
         this.props.generateSnaphostInFirestore();
@@ -108,6 +77,8 @@ class ListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header rightAction={() => { this.props.signOut(); }} />
+        <View style={styles.innerContainer}>
         <ShoppingList
           itemProps={{
             onIncrement: this.onIncrement,
@@ -118,6 +89,7 @@ class ListScreen extends React.Component {
           onSaveItem={this.onSaveItem}
           list={this.props.shoppingList}
         />
+        </View>
       </View>
     );
   }
@@ -126,12 +98,15 @@ class ListScreen extends React.Component {
 const styles = {
   container: {
     flex: 1
+  },
+  innerContainer: {
+    flex: 1,
   }
 };
 
-const mapStateToProps = ({ shoppingListStore, userStore }) => {
+const mapStateToProps = ({ shoppingListStore, sessionStore }) => {
   const { shoppingList } = shoppingListStore;
-  const { user } = userStore;
+  const { user } = sessionStore;
   return {
     shoppingList,
     user

@@ -5,29 +5,15 @@ import { connect } from 'react-redux';
 import { HouseInput, HouseButton } from '../components';
 import Languages from '../../../localization';
 
-import { joinHouse, initializeHouse } from '../../../redux/actions';
+import { joinHouse } from '../../../redux/actions';
 
 class JoinHouseScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      houseName: 'devinim',
-      loading: true
+      houseName: 'devinim'
     };
-  };
-
-  async componentWillMount() {
-    await this.props.initializeHouse();
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.house.id) this.proceed();
-    else this.setState({ loading: false });
-  }
-
-  proceed() {
-    this.props.navigation.navigate('List');
   };
 
   joinHouse(name) {
@@ -36,17 +22,6 @@ class JoinHouseScreen extends React.Component {
 
   render() {
     const language = 'EN';
-
-    if (this.state.loading) {
-      return (
-        <View>
-          <Text>
-            Loading...
-          </Text>
-        </View>
-      )
-    }
-
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -91,7 +66,7 @@ const styles = {
 };
 
 const mapStateToProps = ({ sessionStore }) => ({
-  house: sessionStore.house
+    house: sessionStore.house
 });
 
-export default connect(mapStateToProps, { joinHouse, initializeHouse })(JoinHouseScreen);
+export default connect(mapStateToProps, { joinHouse })(JoinHouseScreen);

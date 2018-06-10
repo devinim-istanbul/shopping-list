@@ -37,7 +37,8 @@
       "bundleIdentifier": "com.devinim.shoppinglist"
     },
     "android": {
-      "package": "com.devinim.shoppinglist"
+      "package": "com.devinim.shoppinglist",
+      "versionCode": 3
     },
     "androidStatusBar": {
       "barStyle": "light-content",

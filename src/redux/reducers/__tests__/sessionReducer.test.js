@@ -7,35 +7,71 @@ describe('sessionReducer reducer', () => {
     expect(reducer(undefined, {})).toEqual(SESSION_INITIAL_STATE);
   });
 
-  it('should set house to store', () => {
-    const payloadSnapshot = {
-      name: 'house1',
-      user: {
-        name: 'dinco'
-      }
-    };
-
+  it('should set user to store', () => {
     expect(
       reducer(
-        {},
         {
-          type: SESSION.SET_HOUSE_TO_SESSION,
-          payload: payloadSnapshot
+          house: { id: 1, name: 'house1' }
+        },
+        {
+          type: SESSION.SET_USER_TO_SESSION,
+          payload: { id: 1, name: 'user1' }
         }
       )
     ).toEqual({
-      house: payloadSnapshot
+      user: { id: 1, name: 'user1' },
+      house: { id: 1, name: 'house1' }
+    });
+  });
+
+  it('should remove user from store', () => {
+    expect(
+      reducer(
+        {
+          user: { id: 1, name: 'user1' },
+          house: { id: 1, name: 'house1' }
+        },
+        {
+          type: SESSION.DELETE_USER_FROM_SESSION
+        }
+      )
+    ).toEqual({
+      user: {},
+      house: { id: 1, name: 'house1' }
+    });
+  });
+
+  it('should set house to store', () => {
+    expect(
+      reducer(
+        {
+          user: { id: 1, name: 'user1' }
+        },
+        {
+          type: SESSION.SET_HOUSE_TO_SESSION,
+          payload: { id: 1, name: 'house1' }
+        }
+      )
+    ).toEqual({
+      user: { id: 1, name: 'user1' },
+      house: { id: 1, name: 'house1' }
     });
   });
 
   it('should remove house from store', () => {
     expect(
       reducer(
-        {},
+        {
+          user: { id: 1, name: 'user1' },
+          house: { id: 1, name: 'house1' }
+        },
         {
           type: SESSION.DELETE_HOUSE_FROM_SESSION
         }
       )
-    ).toEqual(SESSION_INITIAL_STATE);
+    ).toEqual({
+      user: { id: 1, name: 'user1' },
+      house: {}
+    });
   });
 });
