@@ -81,6 +81,8 @@ export const updateUser = user => async (dispatch, getState) => {
     const { sessionStore } = getState();
     const newUser = { ...sessionStore.user, ...user };
 
+    console.log(newUser);
+
     const userRef = firebase
       .database()
       .ref(`/users`);
@@ -170,6 +172,7 @@ export const leaveHouse = () => async (
 };
 
 export const initialize = () => async (dispatch, getState) => {
+  dispatch(emptySession());
   const state = await getStateFromLocalStorage(getState());
   dispatch(initializeAction(state));
 };

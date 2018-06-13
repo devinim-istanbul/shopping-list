@@ -52,7 +52,7 @@ const styles = {
     backgroundColor: globalStyles.headerBackgroundColor,
   },
   marginContainer: {
-    height: globalStyles.headerSize[Platform.OS],
+    height: Platform.OS === 'ios' ? 30 : 0,
   },
   mainContainer: {
     height: globalStyles.headerSize[Platform.OS],
