@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 
-import { HouseInput, HouseButton } from '../components';
+import { LoginInput, LoginButton } from '../../LoginScreen/components';
 import Languages from '../../../localization';
 
 import { joinHouse } from '../../../redux/actions';
@@ -12,7 +12,8 @@ class JoinHouseScreen extends React.Component {
     super(props);
 
     this.state = {
-      houseName: 'devinim'
+      houseName: 'devinim',
+      password: 'whythelongface'
     };
   };
 
@@ -26,17 +27,24 @@ class JoinHouseScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.contentContainer}>
           <View style={styles.formContainer}>
-            <HouseInput
+            <LoginInput
               value={this.state.houseName}
               onChangeText={houseName => this.setState({ houseName })}
               placeholder={ Languages[language]['house-input-placeholder'] }
               keyboardType="default"
             />
-            <HouseButton
-              onPress={() => this.props.joinHouse(this.state.houseName)}
+            <LoginInput
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
+              placeholder={ Languages[language]['house-password-placeholder'] }
+              keyboardType="default"
+              secureTextEntry
+            />
+            <LoginButton
+              onPress={() => this.props.joinHouse(this.state.houseName, this.state.password)}
               text={ Languages[language]['house-join'] }
             />
-            <HouseButton
+            <LoginButton
               onPress={() => this.props.navigation.navigate('CreateHouse')}
               text={ Languages[language]['house-create'] }
               style={styles.signUpButton}

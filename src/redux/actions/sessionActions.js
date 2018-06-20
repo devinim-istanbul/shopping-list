@@ -107,7 +107,7 @@ export const signOut = () => async dispatch => {
   }
 };
 
-export const createHouse = houseName => async dispatch => {
+export const createHouse = (houseName, password) => async dispatch => {
   const houseRef = firebase
     .database()
     .ref(`/houses`);
@@ -118,6 +118,7 @@ export const createHouse = houseName => async dispatch => {
     info: {
       id: houseId,
       name: houseName,
+      password,
       createdAt: firebase.database.ServerValue.TIMESTAMP
     }
   };
@@ -137,7 +138,7 @@ const getHouseById = async houseId => {
   return houseRef.val();
 };
 
-export const joinHouse = houseName => async dispatch => {
+export const joinHouse = (houseName, password) => async dispatch => {
   const houseRef = await firebase
     .database()
     .ref('/houses')
@@ -149,6 +150,10 @@ export const joinHouse = houseName => async dispatch => {
     return;
 
   const house = houseRef.val()[Object.keys(houseRef.val())[0]];
+
+  if(house.info.password !== password)
+    // redirect this to error handler when it's available
+    return;
 
   updateUser({ houseId: house.info.id });
   dispatch(setHouseToSessionAction(house.info));
