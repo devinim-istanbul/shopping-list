@@ -25,11 +25,16 @@ const emptySession = () => ({ type: EMPTY_SESSION });
 
 export const signUp = (email, password) => async dispatch => {
   try {
-    const { uid, refreshToken, displayName, phoneNumber, photoURL } = await firebase
+
+    const auth = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
 
-    const user = { uid, refreshToken, displayName, phoneNumber, photoURL, email };
+    const token = await auth.user.getIdToken();
+
+    const { uid } = auth.user;
+
+    const user = { uid, email, token };
 
     const userRef = firebase
       .database()
@@ -48,7 +53,7 @@ export const signIn = (email, password) => async dispatch => {
   try {
     const auth = await firebase
       .auth()
-      .signInAndRetrieveDataWithEmailAndPassword(email, password);
+      .signInWithEmailAndPassword(email, password);
 
     const userRef = await firebase
       .database()
@@ -60,7 +65,7 @@ export const signIn = (email, password) => async dispatch => {
     dispatch(setUserToSessionAction(user));
 
     if(user.houseId) {
-      dispatch(setHouseToSessionAction(getHouseById(user.houseId)));
+      dispatch(setHouseToSessionAction(await getHouseById(user.houseId)));
     }
 
   } catch (error) {
@@ -94,11 +99,23 @@ export const updateUser = user => async (dispatch, getState) => {
   }
 };
 
-export const signOut = () => async dispatch => {
+export const signOut = () => async (
+  dispatch,
+  getStore
+) => {
   try {
+
+    const { sessionStore } = getStore();
+    const { house } = sessionStore;
+
     await firebase
       .auth()
       .signOut();
+
+    firebase
+      .database()
+      .ref(`/houses/${house.id}/shoppingList/events`)
+      .off('child_added');
 
     dispatch(emptySession());
 
@@ -138,7 +155,7 @@ const getHouseById = async houseId => {
   return houseRef.val();
 };
 
-export const joinHouse = (houseName, password) => async dispatch => {
+export const joinHouse = (houseName, password) => async (dispatch, getState) => {
   const houseRef = await firebase
     .database()
     .ref('/houses')
@@ -151,11 +168,12 @@ export const joinHouse = (houseName, password) => async dispatch => {
 
   const house = houseRef.val()[Object.keys(houseRef.val())[0]];
 
-  if(house.info.password !== password)
+  if(house.info.password !== password) {
     // redirect this to error handler when it's available
     return;
+  }
 
-  updateUser({ houseId: house.info.id });
+  await updateUser({ houseId: house.info.id })(dispatch, getState);
   dispatch(setHouseToSessionAction(house.info));
 
 };
@@ -180,7 +198,7 @@ export const initialize = () => async (dispatch, getState) => {
 };
 
 const getStateFromLocalStorage = async () => {
-  const user = JSON.parse(await LocalStorageService.getItem('user'));
-  const house = JSON.parse(await LocalStorageService.getItem('house'));
+  const user = JSON.parse(await LocalStorageService.getItem('user')) || {};
+  const house = JSON.parse(await LocalStorageService.getItem('house')) || {};
   return { user, house };
 };

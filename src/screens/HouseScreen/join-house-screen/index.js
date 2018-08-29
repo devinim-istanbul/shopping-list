@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton } from '../../LoginScreen/components';
@@ -13,7 +13,7 @@ class JoinHouseScreen extends React.Component {
 
     this.state = {
       houseName: 'devinim',
-      password: 'whythelongface'
+      password: '12345678'
     };
   };
 

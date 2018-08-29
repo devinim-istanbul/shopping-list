@@ -18,9 +18,12 @@ class ListScreen extends React.Component {
     header: null
   });
 
-  componentDidMount() {
+  constructor(props){
+    super(props);
     this.props.loadShoppinglistEventsFromFirestore();
+  }
 
+  componentDidMount() {
     AppState.addEventListener('change', state => {
       if (state === 'background' || state === 'inactive') {
         this.props.generateSnaphostInFirestore();
