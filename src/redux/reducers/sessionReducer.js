@@ -28,7 +28,7 @@ export default (state = SESSION_INITIAL_STATE, action) => {
     case INITIALIZE:
       return { ...state, ...action.payload };
     case EMPTY_SESSION:
-      return { ...state, user: {}, house: {} };
+      return SESSION_INITIAL_STATE;
     default:
       return state;
   }

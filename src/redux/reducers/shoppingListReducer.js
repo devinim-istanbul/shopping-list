@@ -1,4 +1,4 @@
-import { SHOPPING_LIST } from '../types';
+import { SESSION, SHOPPING_LIST } from '../types';
 import { SHOPPING_INITIAL_STATE } from './initial';
 
 export default (state = SHOPPING_INITIAL_STATE, action) => {
@@ -16,6 +16,8 @@ export default (state = SHOPPING_INITIAL_STATE, action) => {
       return { ...state, shoppingList: incrementQuantity(state.shoppingList, action.payload) };
     case SHOPPING_LIST.DECREMENT_QUANTITY:
       return { ...state, shoppingList: decrementQuantity(state.shoppingList, action.payload) };
+    case SESSION.EMPTY_SESSION:
+      return SHOPPING_INITIAL_STATE;
     default:
       return state;
   }
