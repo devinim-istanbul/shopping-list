@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { LoginInput, LoginButton } from '../../LoginScreen/components';
@@ -15,7 +15,7 @@ class CreateHouseScreen extends React.Component {
       houseName: '',
       password: ''
     };
-  };
+  }
 
   render() {
     const language = 'EN';
@@ -26,19 +26,24 @@ class CreateHouseScreen extends React.Component {
             <LoginInput
               value={this.state.houseName}
               onChangeText={houseName => this.setState({ houseName })}
-              placeholder={ Languages[language]['house-input-placeholder'] }
+              placeholder={Languages[language]['house-input-placeholder']}
               keyboardType="default"
             />
             <LoginInput
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
-              placeholder={ Languages[language]['house-password-placeholder'] }
+              placeholder={Languages[language]['house-password-placeholder']}
               keyboardType="default"
               secureTextEntry
             />
             <LoginButton
-              onPress={() => this.props.createHouse(this.state.houseName, this.state.password)}
-              text={ Languages[language]['house-create'] }
+              onPress={() =>
+                this.props.createHouse(
+                  this.state.houseName,
+                  this.state.password
+                )
+              }
+              text={Languages[language]['house-create']}
             />
           </View>
         </View>
@@ -50,13 +55,13 @@ class CreateHouseScreen extends React.Component {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   contentContainer: {
-    flex: 4,
+    flex: 4
   },
   signUpButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   signUpButtonText: {
     color: '#7ED321'
@@ -67,4 +72,7 @@ const mapStateToProps = ({ sessionStore }) => ({
   house: sessionStore.house
 });
 
-export default connect(mapStateToProps, { createHouse })(CreateHouseScreen);
+export default connect(
+  mapStateToProps,
+  { createHouse }
+)(CreateHouseScreen);

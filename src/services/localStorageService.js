@@ -7,7 +7,7 @@ export const setItem = (key, value = {}) => {
   AsyncStorage.setItem(fullKey, fullValue);
 };
 
-export const getItem = async (key) => {
+export const getItem = async key => {
   const fullKey = `@ShoppingList:${key}`;
   return AsyncStorage.getItem(fullKey);
 };

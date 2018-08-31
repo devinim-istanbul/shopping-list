@@ -12,8 +12,8 @@ class SignInScreen extends React.Component {
   };
 
   state = {
-    email : 'dincozdemir@gmail.com',
-    password : '12345678'
+    email: 'dincozdemir@gmail.com',
+    password: '12345678'
   };
 
   navigateSignUp = () => {
@@ -24,8 +24,8 @@ class SignInScreen extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar
-          barStyle='dark-content'
-          backgroundColor='#fff'
+          barStyle="dark-content"
+          backgroundColor="#fff"
           translucent={false}
         />
         <LoginImage />
@@ -34,36 +34,36 @@ class SignInScreen extends React.Component {
             <LoginInput
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
-              placeholder='E-mail'
-              icon='user'
-              keyboardType='email-address'
+              placeholder="E-mail"
+              icon="user"
+              keyboardType="email-address"
             />
             <LoginInput
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
-              placeholder='Password'
-              icon='lock'
+              placeholder="Password"
+              icon="lock"
               secureTextEntry
             />
             <LoginButton
               onPress={() =>
                 this.props.signIn(this.state.email, this.state.password)
               }
-              text='Sign In'
+              text="Sign In"
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              icon='google-plus'
+              icon="google-plus"
               style={{ backgroundColor: globalStyles.googleColor }}
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              icon='facebook'
+              icon="facebook"
               style={{ backgroundColor: globalStyles.facebookColor }}
             />
             <LoginButton
               onPress={() => this.navigateSignUp()}
-              text='Sign Up'
+              text="Sign Up"
               style={styles.signUpButton}
               textStyle={styles.signUpButtonText}
             />
@@ -92,4 +92,7 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, { signIn })(SignInScreen);
+export default connect(
+  mapStateToProps,
+  { signIn }
+)(SignInScreen);

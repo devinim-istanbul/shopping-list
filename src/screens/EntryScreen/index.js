@@ -1,27 +1,28 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-import { initialize } from "../../redux/actions";
+import { initialize } from '../../redux/actions';
 
 class EntryScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.initialize();
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <View>
-        <Text>
-          Loading...
-        </Text>
+        <Text>Loading...</Text>
       </View>
-    )
+    );
   }
 }
 
-export default connect(null, { initialize })(EntryScreen);
+export default connect(
+  null,
+  { initialize }
+)(EntryScreen);

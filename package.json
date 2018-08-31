@@ -2,8 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "precommit": "lint-staged | npm test",
-    "test": "node_modules/.bin/jest",
+    "precommit": "lint-staged && npm test",
+    "test": "jest",
     "appr": "appr",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
     "eslint": "eslint –config ./src/ --ignore-pattern '!.eslintrc.js'",
@@ -13,8 +13,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint –config ./src/ --ignore-pattern '!.eslintrc.js' --fix",
-      "prettier --single-quote --write",
+      "npm run prettier",
+      "npm run eslint",
       "git add"
     ]
   },
@@ -32,10 +32,9 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-elements": "^1.0.0-beta5",
     "react-native-popup-dialog": "^0.11.46",
-    "react-native-safe-area-view": "^0.8.0",
     "react-native-swipeable": "^0.6.0",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^2.0.0-rc.9",
+    "react-navigation": "^2.12.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
@@ -55,7 +54,7 @@
     "exp": "^53.1.0",
     "husky": "^0.14.3",
     "jest-expo": "^27.0.1",
-    "lint-staged": "^7.1.0",
-    "prettier": "^1.12.1"
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2"
   }
 }

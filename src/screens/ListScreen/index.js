@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, AppState } from "react-native";
+import { View, AppState } from 'react-native';
 import { connect } from 'react-redux';
 import ShoppingList from './shopping-list';
 import Header from './shopping-list/Header';
@@ -18,7 +18,7 @@ class ListScreen extends React.Component {
     header: null
   });
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.props.loadShoppinglistEventsFromFirestore();
   }
@@ -80,18 +80,22 @@ class ListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header rightAction={() => { this.props.signOut(); }} />
-        <View style={styles.innerContainer}>
-        <ShoppingList
-          itemProps={{
-            onIncrement: this.onIncrement,
-            onDecrement: this.onDecrement,
-            onRemoveItem: this.onRemoveItem,
-            onToggle: this.onToggle
+        <Header
+          rightAction={() => {
+            this.props.signOut();
           }}
-          onSaveItem={this.onSaveItem}
-          list={this.props.shoppingList}
         />
+        <View style={styles.innerContainer}>
+          <ShoppingList
+            itemProps={{
+              onIncrement: this.onIncrement,
+              onDecrement: this.onDecrement,
+              onRemoveItem: this.onRemoveItem,
+              onToggle: this.onToggle
+            }}
+            onSaveItem={this.onSaveItem}
+            list={this.props.shoppingList}
+          />
         </View>
       </View>
     );
@@ -103,7 +107,7 @@ const styles = {
     flex: 1
   },
   innerContainer: {
-    flex: 1,
+    flex: 1
   }
 };
 
@@ -116,9 +120,12 @@ const mapStateToProps = ({ shoppingListStore, sessionStore }) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  loadShoppinglistEventsFromFirestore,
-  pushShoppinglistEventToFirestore,
-  generateSnaphostInFirestore,
-  signOut
-})(ListScreen);
+export default connect(
+  mapStateToProps,
+  {
+    loadShoppinglistEventsFromFirestore,
+    pushShoppinglistEventToFirestore,
+    generateSnaphostInFirestore,
+    signOut
+  }
+)(ListScreen);
