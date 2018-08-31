@@ -6,4 +6,4 @@ export default ({ getState }) => next => async action => {
   const state = getState();
   await localStorageListener(action, state);
   await navigationListener(action, state);
-}
+};

@@ -16,7 +16,8 @@ class SignUpScreen extends React.Component {
       displayName: 'Dinç Özdemir',
       email: 'dincozdemir@gmail.com',
       password: '12345678',
-      photoURL: 'https://scontent.fist2-2.fna.fbcdn.net/v/t1.0-9/12923114_10154183955717033_6649943181169319981_n.jpg?_nc_cat=0&oh=5042398bfbe9f34c7080fd34d762eaf2&oe=5BB6889C'
+      photoURL:
+        'https://scontent.fist2-2.fna.fbcdn.net/v/t1.0-9/12923114_10154183955717033_6649943181169319981_n.jpg?_nc_cat=0&oh=5042398bfbe9f34c7080fd34d762eaf2&oe=5BB6889C'
     };
   }
 
@@ -90,4 +91,7 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, { signUp, updateUser })(SignUpScreen);
+export default connect(
+  mapStateToProps,
+  { signUp, updateUser }
+)(SignUpScreen);

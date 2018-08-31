@@ -5,5 +5,5 @@ import shoppingListReducer from './shoppingListReducer';
 
 export default combineReducers({
   sessionStore: sessionReducer,
-  shoppingListStore: shoppingListReducer,
+  shoppingListStore: shoppingListReducer
 });

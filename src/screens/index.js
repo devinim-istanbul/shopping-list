@@ -4,4 +4,12 @@ import ButtonScreen from './ButtonScreen';
 import ListScreen from './ListScreen';
 import { CreateHouseScreen, JoinHouseScreen } from './HouseScreen';
 
-export { EntryScreen, SignInScreen, SignUpScreen, ButtonScreen, ListScreen, CreateHouseScreen, JoinHouseScreen };
+export {
+  EntryScreen,
+  SignInScreen,
+  SignUpScreen,
+  ButtonScreen,
+  ListScreen,
+  CreateHouseScreen,
+  JoinHouseScreen
+};
