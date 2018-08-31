@@ -121,7 +121,10 @@ const LeftBottomContainer = props => (
 const LeftBottomLeftContainer = ({ user }) => {
   const content =
     user && user.photoURL ? (
-      <Image source={{ uri: user.photoURL }} style={styles.leftBottomLeftImage} />
+      <Image
+        source={{ uri: user.photoURL }}
+        style={styles.leftBottomLeftImage}
+      />
     ) : null;
   return <View style={styles.leftBottomLeftContainer}>{content}</View>;
 };
@@ -186,7 +189,7 @@ const styles = {
     padding: common.containerInnerPadding,
     backgroundColor: debug ? 'yellow' : '#fff',
     borderBottomWidth: 1,
-    borderColor: common.borderColor,
+    borderColor: common.borderColor
   },
   innerContainer: {
     flex: 1,
@@ -318,10 +321,8 @@ const styles = {
     textAlign: 'center',
     color: 'red'
   },
-  firstItem: {
-  },
-  lastItem: {
-  }
+  firstItem: {},
+  lastItem: {}
 };
 
 export default ListItem;

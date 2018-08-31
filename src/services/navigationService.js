@@ -1,4 +1,4 @@
-import { NavigationActions, StackActions } from "react-navigation";
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class NavigationService {
   initialize(navigator) {
@@ -22,7 +22,7 @@ class NavigationService {
   navigate(routeName, params) {
     this.navigator.dispatch(
       NavigationActions.navigate({
-        type: "Navigation/NAVIGATE",
+        type: 'Navigation/NAVIGATE',
         routeName,
         params
       })

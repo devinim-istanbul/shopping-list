@@ -8,7 +8,6 @@ describe('shoppingList reducer', () => {
   });
 
   it('should addItem to shoppingList', () => {
-
     const state = { shoppingList: [] };
 
     const event = {
@@ -32,13 +31,7 @@ describe('shoppingList reducer', () => {
       ]
     };
 
-    expect(
-      reducer(
-        state,
-        event
-      )
-    ).toEqual(newState);
-
+    expect(reducer(state, event)).toEqual(newState);
   });
 
   it('should editItem of shoppingList', () => {
@@ -72,12 +65,7 @@ describe('shoppingList reducer', () => {
       ]
     };
 
-    expect(
-      reducer(
-        state,
-        event
-      )
-    ).toEqual(newState);
+    expect(reducer(state, event)).toEqual(newState);
   });
 
   it('should removeItem of shoppingList', () => {
@@ -95,7 +83,7 @@ describe('shoppingList reducer', () => {
     const event = {
       type: SHOPPING_LIST.REMOVE_ITEM,
       payload: {
-        id: 0,
+        id: 0
       }
     };
 
@@ -103,13 +91,7 @@ describe('shoppingList reducer', () => {
       shoppingList: []
     };
 
-    expect(
-      reducer(
-        state,
-        event
-      )
-    ).toEqual(newState);
-
+    expect(reducer(state, event)).toEqual(newState);
   });
 
   it('should incrementQuantity of item of shoppingList', () => {
@@ -127,7 +109,7 @@ describe('shoppingList reducer', () => {
     const event = {
       type: SHOPPING_LIST.INCREMENT_QUANTITY,
       payload: {
-        id: 0,
+        id: 0
       }
     };
 
@@ -138,16 +120,11 @@ describe('shoppingList reducer', () => {
           name: 'Beer',
           quantity: 3,
           done: false
-        }]
+        }
+      ]
     };
 
-    expect(
-      reducer(
-        state,
-        event
-      )
-    ).toEqual(newState);
-
+    expect(reducer(state, event)).toEqual(newState);
   });
 
   it('should decrementQuantity of item of shoppingList', () => {
@@ -165,7 +142,7 @@ describe('shoppingList reducer', () => {
     const event = {
       type: SHOPPING_LIST.DECREMENT_QUANTITY,
       payload: {
-        id: 0,
+        id: 0
       }
     };
 
@@ -180,12 +157,6 @@ describe('shoppingList reducer', () => {
       ]
     };
 
-    expect(
-      reducer(
-        state,
-        event
-      )
-    ).toEqual(newState);
+    expect(reducer(state, event)).toEqual(newState);
   });
-
 });

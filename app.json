@@ -38,7 +38,7 @@
     },
     "android": {
       "package": "com.devinim.shoppinglist",
-      "versionCode": 3
+      "versionCode": 4
     },
     "androidStatusBar": {
       "barStyle": "light-content",

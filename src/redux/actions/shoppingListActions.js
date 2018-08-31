@@ -22,13 +22,14 @@ export const loadShoppinglistEventsFromFirestore = () => async (
   firebase
     .database()
     .ref(`/houses/${house.id}/shoppingList/events`)
-    .orderByChild('timestamp').startAt(timestamp)
+    .orderByChild('timestamp')
+    .startAt(timestamp)
     .on('child_added', eventSnapshot => {
       dispatch(eventSnapshot.val());
     });
 };
 
-const getShoppingListFBSnapshot = async (house) => {
+const getShoppingListFBSnapshot = async house => {
   const snapshot = await firebase
     .database()
     .ref(`/houses/${house.id}/shoppingList/snapshot`)
@@ -37,11 +38,47 @@ const getShoppingListFBSnapshot = async (house) => {
   return snapshot.val();
 };
 
+export const onIncrement = item => (dispatch, getStore) => {
+  pushShoppinglistEventToFirestore({
+    type: SHOPPING_LIST.INCREMENT_QUANTITY,
+    payload: item
+  })(dispatch, getStore);
+};
 
-export const pushShoppinglistEventToFirestore = event => (
-  dispatch,
-  getStore
-) => {
+export const onDecrement = item => (dispatch, getStore) => {
+  if (item.quantity > 1) {
+    pushShoppinglistEventToFirestore({
+      type: SHOPPING_LIST.DECREMENT_QUANTITY,
+      payload: item
+    })(dispatch, getStore);
+  }
+};
+
+export const onToggle = item => (dispatch, getStore) => {
+  pushShoppinglistEventToFirestore({
+    type: SHOPPING_LIST.EDIT_ITEM,
+    payload: { ...item, done: !item.done }
+  })(dispatch, getStore);
+};
+
+export const onSaveItem = item => (dispatch, getStore) => {
+  const type = item.id ? SHOPPING_LIST.EDIT_ITEM : SHOPPING_LIST.ADD_ITEM;
+  pushShoppinglistEventToFirestore({
+    type,
+    payload: item
+  })(dispatch, getStore);
+};
+
+export const onRemoveItem = item => (dispatch, getStore) => {
+  pushShoppinglistEventToFirestore({
+    type: SHOPPING_LIST.REMOVE_ITEM,
+    payload: {
+      id: item.id
+    }
+  })(dispatch, getStore);
+};
+
+const pushShoppinglistEventToFirestore = event => (dispatch, getStore) => {
   const { sessionStore } = getStore();
   const { house, user } = sessionStore;
 
@@ -70,10 +107,7 @@ export const pushShoppinglistEventToFirestore = event => (
   ref.child(key).set(newEvent);
 };
 
-export const generateSnaphostInFirestore = () => async (
-  dispatch,
-  getStore
-) => {
+export const generateSnaphostInFirestore = () => async (dispatch, getStore) => {
   const {
     shoppingListStore: { shoppingList },
     sessionStore: { house }
