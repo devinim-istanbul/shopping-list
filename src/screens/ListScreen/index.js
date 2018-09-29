@@ -6,12 +6,13 @@ import Header from './shopping-list/Header';
 
 import {
   loadShoppinglistEventsFromFirestore,
-  pushShoppinglistEventToFirestore,
+  onIncrement,
+  onDecrement,
+  onRemoveItem,
+  onToggle,
   generateSnaphostInFirestore,
   signOut
 } from '../../redux/actions';
-
-import { SHOPPING_LIST } from '../../redux/types';
 
 class ListScreen extends React.Component {
   static navigationOptions = () => ({
@@ -39,44 +40,6 @@ class ListScreen extends React.Component {
     });
   }
 
-  onIncrement = item => {
-    this.props.pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.INCREMENT_QUANTITY,
-      payload: item
-    });
-  };
-
-  onDecrement = item => {
-    this.props.pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.DECREMENT_QUANTITY,
-      payload: item
-    });
-  };
-
-  onToggle = item => {
-    this.props.pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.EDIT_ITEM,
-      payload: { ...item, done: !item.done }
-    });
-  };
-
-  onSaveItem = item => {
-    const type = item.id ? SHOPPING_LIST.EDIT_ITEM : SHOPPING_LIST.ADD_ITEM;
-    this.props.pushShoppinglistEventToFirestore({
-      type,
-      payload: item
-    });
-  };
-
-  onRemoveItem = item => {
-    this.props.pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.REMOVE_ITEM,
-      payload: {
-        id: item.id
-      }
-    });
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -88,10 +51,10 @@ class ListScreen extends React.Component {
         <View style={styles.innerContainer}>
           <ShoppingList
             itemProps={{
-              onIncrement: this.onIncrement,
-              onDecrement: this.onDecrement,
-              onRemoveItem: this.onRemoveItem,
-              onToggle: this.onToggle
+              onIncrement: this.props.onIncrement,
+              onDecrement: this.props.onDecrement,
+              onRemoveItem: this.props.onRemoveItem,
+              onToggle: this.props.onToggle
             }}
             onSaveItem={this.onSaveItem}
             list={this.props.shoppingList}
@@ -124,7 +87,10 @@ export default connect(
   mapStateToProps,
   {
     loadShoppinglistEventsFromFirestore,
-    pushShoppinglistEventToFirestore,
+    onIncrement,
+    onDecrement,
+    onRemoveItem,
+    onToggle,
     generateSnaphostInFirestore,
     signOut
   }
