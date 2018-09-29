@@ -39,12 +39,10 @@ const getShoppingListFBSnapshot = async house => {
 };
 
 export const onIncrement = item => (dispatch, getStore) => {
-  if (item.quantity < 100) {
-    pushShoppinglistEventToFirestore({
-      type: SHOPPING_LIST.INCREMENT_QUANTITY,
-      payload: item
-    })(dispatch, getStore);
-  }
+  pushShoppinglistEventToFirestore({
+    type: SHOPPING_LIST.INCREMENT_QUANTITY,
+    payload: item
+  })(dispatch, getStore);
 };
 
 export const onDecrement = item => (dispatch, getStore) => {
