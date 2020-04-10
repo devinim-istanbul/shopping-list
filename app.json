@@ -4,7 +4,6 @@
     "description": "Shopping List",
     "slug": "shopping-list",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
     "primaryColor": "#55ab2b",
     "platforms": [
       "ios",
