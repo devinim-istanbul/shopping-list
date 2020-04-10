@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import Sentry from 'sentry-expo';
+import * as Sentry from 'sentry-expo';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -19,8 +19,10 @@ const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, Navigator));
 class App extends React.Component {
   constructor() {
     super();
+    console.log(config);
+    // eslint-disable-next-line no-console
     console.ignoredYellowBox = ['Setting a timer'];
-    Sentry.config(config.sentry.publicDSN).install();
+    Sentry.init(config.sentry);
   }
 
   state = {
