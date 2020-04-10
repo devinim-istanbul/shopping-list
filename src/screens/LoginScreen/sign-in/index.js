@@ -7,13 +7,13 @@ import { signIn } from '../../../redux/actions';
 import { globalStyles } from '../../../globals';
 
 class SignInScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   state = {
     email: 'dincozdemir@gmail.com',
     password: '12345678'
+  };
+
+  static navigationOptions = {
+    header: null
   };
 
   navigateSignUp = () => {
@@ -92,7 +92,4 @@ const styles = {
   }
 };
 
-export default connect(
-  mapStateToProps,
-  { signIn }
-)(SignInScreen);
+export default connect(mapStateToProps, { signIn })(SignInScreen);

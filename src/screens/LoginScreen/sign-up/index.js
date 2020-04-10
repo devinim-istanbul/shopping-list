@@ -6,10 +6,6 @@ import { LoginInput, LoginButton } from '../components';
 import { signUp, updateUser } from '../../../redux/actions';
 
 class SignUpScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Sign Up'
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +16,10 @@ class SignUpScreen extends React.Component {
         'https://scontent.fist2-2.fna.fbcdn.net/v/t1.0-9/12923114_10154183955717033_6649943181169319981_n.jpg?_nc_cat=0&oh=5042398bfbe9f34c7080fd34d762eaf2&oe=5BB6889C'
     };
   }
+
+  static navigationOptions = {
+    title: 'Sign Up'
+  };
 
   async signUp(email, password, displayName, photoURL) {
     await this.props.signUp(email, password);
@@ -91,7 +91,4 @@ const styles = {
   }
 };
 
-export default connect(
-  mapStateToProps,
-  { signUp, updateUser }
-)(SignUpScreen);
+export default connect(mapStateToProps, { signUp, updateUser })(SignUpScreen);

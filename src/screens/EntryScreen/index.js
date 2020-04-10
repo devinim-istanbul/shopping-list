@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { initialize } from '../../redux/actions';
 
 class EntryScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   componentDidMount() {
     this.props.initialize();
   }
+
+  static navigationOptions = {
+    header: null
+  };
 
   render() {
     return (
@@ -22,7 +22,4 @@ class EntryScreen extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { initialize }
-)(EntryScreen);
+export default connect(null, { initialize })(EntryScreen);
