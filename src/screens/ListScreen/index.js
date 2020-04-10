@@ -120,12 +120,9 @@ const mapStateToProps = ({ shoppingListStore, sessionStore }) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    loadShoppinglistEventsFromFirestore,
-    pushShoppinglistEventToFirestore,
-    generateSnaphostInFirestore,
-    signOut
-  }
-)(ListScreen);
+export default connect(mapStateToProps, {
+  loadShoppinglistEventsFromFirestore,
+  pushShoppinglistEventToFirestore,
+  generateSnaphostInFirestore,
+  signOut
+})(ListScreen);

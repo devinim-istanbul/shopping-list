@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8"
+  - "13"
 cache:
   directories:
     - node_modules
@@ -10,8 +10,8 @@ branches:
     - alfa
     - stable
 script:
-  - 'echo "$DECRYPT_PASSWORD" | npm run decrypt'
-  - 'npm test'
+  - 'echo "$DECRYPT_PASSWORD" | yarn decrypt'
+  - 'yarn test'
   - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)'
   - 'echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"'
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$BRANCH" == "stable" ]; then npm run appr; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$BRANCH" == "stable" ]; then yarn appr; fi'

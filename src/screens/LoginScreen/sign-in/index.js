@@ -7,13 +7,13 @@ import { signIn } from '../../../redux/actions';
 import { globalStyles } from '../../../globals';
 
 class SignInScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   state = {
     email: 'dincozdemir@gmail.com',
     password: '12345678'
+  };
+
+  static navigationOptions = {
+    header: null
   };
 
   navigateSignUp = () => {
@@ -51,6 +51,7 @@ class SignInScreen extends React.Component {
               }
               text="Sign In"
             />
+            {/**
             <LoginButton
               onPress={() => this.navigateSignUp()}
               icon="google-plus"
@@ -61,6 +62,7 @@ class SignInScreen extends React.Component {
               icon="facebook"
               style={{ backgroundColor: globalStyles.facebookColor }}
             />
+            */}
             <LoginButton
               onPress={() => this.navigateSignUp()}
               text="Sign Up"
@@ -92,7 +94,4 @@ const styles = {
   }
 };
 
-export default connect(
-  mapStateToProps,
-  { signIn }
-)(SignInScreen);
+export default connect(mapStateToProps, { signIn })(SignInScreen);

@@ -4,10 +4,12 @@
     "description": "Shopping List",
     "slug": "shopping-list",
     "privacy": "public",
-    "sdkVersion": "27.0.0",
     "primaryColor": "#55ab2b",
-    "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "hooks": {
@@ -38,7 +40,7 @@
     },
     "android": {
       "package": "com.devinim.shoppinglist",
-      "versionCode": 3
+      "versionCode": 1
     },
     "androidStatusBar": {
       "barStyle": "light-content",

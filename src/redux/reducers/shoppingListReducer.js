@@ -43,23 +43,20 @@ const removeItem = (list, item) =>
   list.filter(itemOfList => item.id !== itemOfList.id);
 
 const editItem = (list, item) =>
-  list.map(
-    itemOfList =>
-      item.id === itemOfList.id ? { ...itemOfList, ...item } : itemOfList
+  list.map(itemOfList =>
+    item.id === itemOfList.id ? { ...itemOfList, ...item } : itemOfList
   );
 
 const incrementQuantity = (list, item) =>
-  list.map(
-    itemOfList =>
-      item.id === itemOfList.id
-        ? { ...itemOfList, quantity: itemOfList.quantity + 1 }
-        : itemOfList
+  list.map(itemOfList =>
+    item.id === itemOfList.id
+      ? { ...itemOfList, quantity: itemOfList.quantity + 1 }
+      : itemOfList
   );
 
 const decrementQuantity = (list, item) =>
-  list.map(
-    itemOfList =>
-      item.id === itemOfList.id
-        ? { ...itemOfList, quantity: itemOfList.quantity - 1 }
-        : itemOfList
+  list.map(itemOfList =>
+    item.id === itemOfList.id
+      ? { ...itemOfList, quantity: itemOfList.quantity - 1 }
+      : itemOfList
   );

@@ -72,7 +72,4 @@ const mapStateToProps = ({ sessionStore }) => ({
   house: sessionStore.house
 });
 
-export default connect(
-  mapStateToProps,
-  { createHouse }
-)(CreateHouseScreen);
+export default connect(mapStateToProps, { createHouse })(CreateHouseScreen);
