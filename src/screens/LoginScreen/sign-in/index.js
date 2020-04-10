@@ -51,6 +51,7 @@ class SignInScreen extends React.Component {
               }
               text="Sign In"
             />
+            {/**
             <LoginButton
               onPress={() => this.navigateSignUp()}
               icon="google-plus"
@@ -61,6 +62,7 @@ class SignInScreen extends React.Component {
               icon="facebook"
               style={{ backgroundColor: globalStyles.facebookColor }}
             />
+            */}
             <LoginButton
               onPress={() => this.navigateSignUp()}
               text="Sign Up"
