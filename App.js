@@ -19,7 +19,6 @@ const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, Navigator));
 class App extends React.Component {
   constructor() {
     super();
-    console.log(config);
     // eslint-disable-next-line no-console
     console.ignoredYellowBox = ['Setting a timer'];
     Sentry.init(config.sentry);
