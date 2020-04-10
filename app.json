@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "hooks": {
@@ -40,7 +40,7 @@
     },
     "android": {
       "package": "com.devinim.shoppinglist",
-      "versionCode": 3
+      "versionCode": 1
     },
     "androidStatusBar": {
       "barStyle": "light-content",
