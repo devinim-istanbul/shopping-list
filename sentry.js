@@ -3,7 +3,7 @@ const path = require('path');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const fs = require('fs');
-const sentryCliBinary = require('sentry-cli-binary');
+const sentryCliBinary = require('@sentry/cli');
 const appConfig = require('./config');
 
 module.exports = async options => {
@@ -15,9 +15,7 @@ module.exports = async options => {
     iosManifest,
     androidBundle,
     androidSourceMap,
-    androidManifest,
-    projectRoot,
-    exp
+    projectRoot
   } = options;
 
   const tmpdir = path.resolve(projectRoot, '.tmp', 'sentry');

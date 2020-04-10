@@ -24,6 +24,7 @@
   "dependencies": {
     "expo": "^37.0.0",
     "firebase": "7.9.0",
+    "config-leaf": "^0.3.0",
     "moment": "^2.22.1",
     "react": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.0.tar.gz",
